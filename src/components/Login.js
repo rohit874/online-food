@@ -25,7 +25,7 @@ function Login(props) {
             },
           };
       axios.post(
-      "/api/login",
+      "https://online-food-backend-api.herokuapp.com/api/login",
       { email, password },
       config).then(res => {
             // do good things

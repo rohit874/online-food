@@ -11,7 +11,7 @@ function Restaurant() {
     const [resItems, setResItems] = useState({});
     const params = useParams()
     useEffect(() => {
-        axios.get(`/api/restaurant/${params.id}`).then((res) => {
+        axios.get(`https://online-food-backend-api.herokuapp.com/api/restaurant/${params.id}`).then((res) => {
             setResInfo(res.data.resInfo);
             setResItems(res.data);
         }).then()

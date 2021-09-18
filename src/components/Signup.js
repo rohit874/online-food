@@ -29,7 +29,7 @@ function Signup(props) {
           };
 
       axios.post(
-      "/api/register",
+      "https://online-food-backend-api.herokuapp.com/api/register",
       { name, email, phone, password },
       config).then(res => {
             // do good things

@@ -6,7 +6,7 @@ function Products() {
     const [products,setProducts] = useState([]);
 
     useEffect(()=>{
-        axios.get('/api/restaurant')
+        axios.get('https://online-food-backend-api.herokuapp.com/api/restaurant')
         .then((res)=> {
     setProducts(res.data);
    });
