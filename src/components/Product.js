@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 function Product(props) {
     const { product } = props;
     return (
-        <Link to ={`/restaurant/${product._id}`}>
+        <a src={`https://online-food-rohit.herokuapp.com/restaurant/${product._id}`}>
         <div className="product">
                     <img src={product.image} alt="" />
                     <div className="product_div1">
@@ -15,7 +14,7 @@ function Product(props) {
                         <p>&#8377;{product.price} for one</p>
                     </div>
                 </div>
-                </Link>
+                </a>
     )
 }
 
