@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Product(props) {
     const { product } = props;
     return (
-        <Link to ={`https://online-food-backend-api.herokuapp.com/restaurant/${product._id}`}>
+        <Link to ={`restaurant/${product._id}`}>
         <div className="product">
                     <img src={product.image} alt="" />
                     <div className="product_div1">
