@@ -1,0 +1,131 @@
+*{margin: 0;padding: 0;box-sizing: border-box;font-family: 'Poppins', sans-serif;}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+}
+.logo{
+    text-decoration: none;
+    font-style: italic;
+    color: black;
+    font-weight: 900;
+    font-size: 30px;
+    /* margin-left: 10px; */
+}
+.search{
+    width: 550px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2);
+}
+.input_1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input_1 input{
+    width: 120px;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+}
+.input_1 img{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.input_divider{
+    margin-left: 1px;
+    border-left: 1.5px solid #c0c0c0;
+    height: 20px;
+}
+.input_2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input_2 input{
+    border: none;
+    outline: none;
+    width: 300px;
+    height: 35px;
+    padding: 5px 10px;
+}
+.input_2 img{
+    width: 20px;
+    height: 20px;
+}
+.nav_right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav_right a{
+    text-decoration: none;
+    margin: 0 10px;
+}
+.nav_right button{
+    margin: 0 10px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+    border: none;
+}
+.sign_in{
+    text-decoration: none;
+    color: black;
+}
+.cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+.cart img{
+    width: 25px;
+    height: 25px;
+}
+.cart span{
+    text-decoration: none;
+    color: black;
+    margin: 0 5px;
+}
+@media only screen and (max-width: 767px) {
+    .search{
+        margin-top: 8px;
+        order: 3;
+        max-width: 400px;
+    }
+    .input_1 input{
+        max-width: 50px;
+        padding: 5px 5px;
+    }
+    .input_2 input{
+        max-width: 200px;
+        height: 35px;
+        padding: 5px 5px;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .search{
+        margin-top: 8px;
+        /* order: 3; */
+        max-width: 400px;
+    }
+    .input_1 input{
+        max-width: 50px;
+        padding: 5px 5px;
+    }
+    .input_2 input{
+        max-width: 200px;
+        height: 35px;
+        padding: 5px 5px;
+    }
+}

@@ -1,0 +1,108 @@
+.products_parent{
+    max-width: 1055px;
+    margin: 0px auto;
+    /* border: 1px solid red; */
+}
+.restaurants_count{
+    font-size: 25px;
+    margin:10px 15px;
+}
+.filter{
+    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.filter_button{
+    color: #a5a5a5;
+    border: 1px solid #bdbcbc;
+    background-color: white;
+    padding: 7px 12px;
+    border-radius: 4px;
+    margin: 5px;
+    cursor: pointer;
+}
+.filter_button:hover{
+    background-color: #f8f8f8;
+}
+.filter_button_seleted{
+    background-color: #e47327;
+    color: white;
+    border: 1px solid #e47327;
+    padding: 7px 12px;
+    border-radius: 4px;
+    margin: 5px;
+    cursor: pointer;
+}
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.products a{
+    text-decoration: none;
+    color: black;
+    margin: 15px;
+}
+.product{
+    width: 100%;
+    border-radius: 7px;
+    border: 1px solid #cfcfcf;
+}
+.product:hover{
+    box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2);
+}
+.product img{
+    border-radius: 7px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+.product_div1{
+    margin: 5px 10px 3px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.product_div1 p{
+    display: flex;
+    align-items: center;
+    color: #363636;
+    font-size: 14px;
+    font-weight: 600;
+}
+.product_div1 p span{
+    color: #e47327;
+    font-size: 18px;
+}
+.product_div2{
+    margin: 0 10px;
+    padding-bottom: 8px;
+}
+.product_div2 p{
+    color: #505050;
+    font-size: 14px;
+}
+@media only screen and (max-width: 767px) {
+    .filter{
+        justify-content: space-around;
+    }
+    .products{
+        flex-direction: column;
+        justify-content: stretch;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .product{
+        max-width: 320px;
+        min-width: 320px;
+    }
+    .product_div2 p{
+        white-space: nowrap; 
+        width: 100%; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

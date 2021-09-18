@@ -1,0 +1,172 @@
+.cart_parent{
+    margin: 0px auto;
+    max-width: 800px;
+    padding-bottom: 60px;
+}
+.cart_button{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+}
+.cart_button a{
+    margin: 10px 0;
+    text-decoration: none;
+    color: black;
+}
+.cart_button button{
+    color: #a5a5a5;
+    border: 1px solid #bdbcbc;
+    background-color: white;
+    padding: 7px 12px;
+    border-radius: 4px;
+    margin: 5px;
+    cursor: pointer;
+}
+.cart_button button:hover{
+    background-color: #f8f8f8;
+}
+.cart_button a.active button{
+    background-color: coral;
+    color: white;
+    border: 1px solid coral;
+}
+.cart_no_found{
+    font-weight: 600;
+    text-align: center;
+    color: #808080;
+    margin: 50px 5px;
+}
+.order_confirm_text{
+    font-weight: 600;
+    color: #0da80d !important;
+}
+.order_address{
+    max-width: 200px;
+    font-size: 14px;
+    margin: 10px;
+    color: #808080;
+}
+.item_cancel_button{
+    padding: 5px 15px;
+    margin: 20px;
+    border-radius: 5px;
+    background-color: #ff5050;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.checkout_button_div{
+    background-color: #ffffffdc;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid rgb(199, 199, 199);
+    text-align: center;
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkout_button_div h3{
+    color: #2c2c2c;
+    font-weight: 500;
+    margin: 0 30px;
+}
+.checkout_button{
+    width: 200px;
+    font-size: 15px;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    background-color: coral;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.checkout{
+    max-width: 550px;
+    margin: auto;
+    padding-bottom: 60px;
+}
+.grand_total{
+    display: flex;
+    justify-content: space-between;
+}
+.grand_total h4{
+    margin: 10px;
+}
+.checkout_divider{
+    width: 100%;
+    border-bottom: 1.5px solid #cacaca;
+}
+.checkout_heading{
+    font-weight: 500;
+    margin: 10px;
+    color: #6e6e6e;
+}
+.select_address{
+    display: flex;
+    align-items: center;
+}
+.select_address input{
+    margin: 10px;
+    width: 18px;
+    height: 18px;
+}
+.select_address label{
+    font-size: 14px;
+    margin: 10px;
+}
+.add_new_add{
+    padding: 5px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: coral;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.add_address{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.add_address textarea{
+    margin: 10px;
+    width: 250px;
+    height: 55px;
+    padding: 5px;
+    border-radius: 3px;
+    resize: none;
+    outline: none;
+    border: 1.5px solid #6e6e6e;
+}
+.add_address button{
+    padding: 5px 15px;
+    margin: 20px;
+    border-radius: 5px;
+    background-color: coral;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+.select_pay{
+    display: flex;
+    align-items: center;
+    margin: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2);
+}
+.select_pay input{
+    margin: 10px;
+    width: 18px;
+    height: 18px;
+}
+.select_pay label{
+    font-size: 14px;
+    margin: 10px;
+}
