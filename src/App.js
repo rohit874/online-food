@@ -76,7 +76,7 @@ const App = () => {
                         <div className="search">
                             <div className="input_1">
                                 <img src={place} alt="place" />
-                                <input placeholder="Place" />
+                                <input placeholder="Place" value="Bijnor"/>
                             </div>
                             <div className="input_divider"></div>
                             <div className="input_2">
@@ -86,7 +86,6 @@ const App = () => {
                         </div>
                         <div className="nav_right">
                         { islogIn ? <button onClick={Logout}>Logout</button>:<button onClick={LoginForm}>Sign in</button> }
-                            {/* <Link to="/signup" className="sign_in">Sign in</Link> */}
                             <Link to="/cart">
                                 <div className="cart">
                                     <img src={cart_img} alt="cart" />
