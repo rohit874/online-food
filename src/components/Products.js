@@ -15,7 +15,7 @@ function Products() {
 
     return (
         <div className="products_parent">
-            <h1 className="restaurants_count">25 restaurants</h1>
+            <h1 className="restaurants_count">{products.length} restaurants</h1>
             <div className="filter">
             <button className="filter_button">Filter</button>
             <button className="filter_button">Rating</button>
