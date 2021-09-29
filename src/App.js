@@ -85,7 +85,7 @@ const App = () => {
                                 <input placeholder="Search for restaurant or a dish" />
                             </div>
                         </div>
-                        <div className="">
+                        <div className="nav_right">
                         { islogIn ? <button onClick={Logout}>Logout</button>:<button onClick={LoginForm}>Sign in</button> }
                             <Link to="/cart">
                                 <div className="cart">
