@@ -43,7 +43,7 @@ function Checkout() {
         setAddressErr("Please select address...");
           return;
         }
-        fetch('https://online-food-backend-api.herokuapp.com/checkout',{
+        fetch('https://online-food-backend-api.herokuapp.com/api/checkout',{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',

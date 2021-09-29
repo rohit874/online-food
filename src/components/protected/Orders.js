@@ -9,7 +9,7 @@ const [items, setItems] = useState([]);
 
     useEffect(() => {
 
-        fetch('/api/order',{
+        fetch('https://online-food-backend-api.herokuapp.com/api/order',{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
