@@ -22,6 +22,7 @@ const App = () => {
 
     const [cart, setCart] = useState({items:{},totalitems:null});
     const [islogIn, setIsLogin] = useState(false);
+    const [location, setLocation] = useState("Bijnor");
     useEffect(() => {
       setCart.items=[];
         const cart = window.localStorage.getItem('cart');
@@ -76,7 +77,7 @@ const App = () => {
                         <div className="search">
                             <div className="input_1">
                                 <img src={place} alt="place" />
-                                <input placeholder="Place" value="Bijnor"/>
+                                <input placeholder="Place" onChange={(e)=>setLocation(e.target.value)} value={location}/>
                             </div>
                             <div className="input_divider"></div>
                             <div className="input_2">
@@ -84,7 +85,7 @@ const App = () => {
                                 <input placeholder="Search for restaurant or a dish" />
                             </div>
                         </div>
-                        <div className="nav_right">
+                        <div className="">
                         { islogIn ? <button onClick={Logout}>Logout</button>:<button onClick={LoginForm}>Sign in</button> }
                             <Link to="/cart">
                                 <div className="cart">
