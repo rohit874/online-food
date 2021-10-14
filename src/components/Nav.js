@@ -21,7 +21,6 @@ function Nav({cart,Logout, islogIn, LoginForm }) {
         await axios.get(`http://localhost:5000/api/search/${quary}`)
         .then((res)=> {
             setSearchResult(res.data.result)
-            console.log(res.data);
    });
     }
 

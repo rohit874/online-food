@@ -31,7 +31,7 @@ const App = () => {
         window.localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart]);
 
-    var [Forms, setForms] = useState({
+    const [Forms, setForms] = useState({
         login: false,
         signup: false,
     });
@@ -57,6 +57,7 @@ const App = () => {
     }
     const setLoginState = (set) =>{
         setIsLogin(set);
+        HideForm();
     }
     
     return (
@@ -71,10 +72,10 @@ const App = () => {
                     />
 
                     {Forms.login ? (
-                        <Login hidebtn={HideForm} islogin={setLoginState} signup_btn={SignupForm} />
+                        <Login HideForm={HideForm} setLoginState={setLoginState} SignupForm={SignupForm} />
                     ) : null}
                     {Forms.signup ? (
-                        <Signup hidebtn={HideForm} islogin={setLoginState} login_btn={LoginForm} />
+                        <Signup HideForm={HideForm} setLoginState={setLoginState} LoginForm={LoginForm} />
                     ) : null}
                     <Switch>
                         <Route path="/" component={Home} exact></Route>

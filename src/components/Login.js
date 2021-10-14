@@ -30,8 +30,7 @@ function Login(props) {
       config).then(res => {
             // do good things
             localStorage.setItem("authToken", res.data.access_token);
-            props.hidebtn();
-            props.islogin(true);
+            props.setLoginState(true);
     })
     .catch(err => {
         if (err.response) {
@@ -50,7 +49,7 @@ function Login(props) {
             
         <div className="form_heading_div">
                 <h2 className="form_heading">Login</h2>
-                <button className="hide_form_btn" onClick={props.hidebtn}>&#x2715;</button>
+                <button className="hide_form_btn" onClick={props.HideForm}>&#x2715;</button>
             </div>
             <p className="error">{error}</p>
 
@@ -67,7 +66,7 @@ function Login(props) {
         
             <div className="signup_btn_div"><button className="signup_btn">Login</button></div>
             </form>
-            <p className="signup_have">New to Tomato? <button onClick={props.signup_btn}>Create account</button></p>
+            <p className="signup_have">New to Tomato? <button onClick={props.SignupForm}>Create account</button></p>
         </div>
         </div>
     )

@@ -34,8 +34,7 @@ function Signup(props) {
       config).then(res => {
             // do good things
             localStorage.setItem("authToken", res.data.access_token);
-            props.hidebtn();
-            props.islogin(true);
+            props.setLoginState(true);
     })
     .catch(err => {
         if (err.response) {
@@ -57,7 +56,7 @@ function Signup(props) {
         <div className="signnup_div">
             <div className="form_heading_div">
                 <h2 className="form_heading">Sign up</h2>
-                <button className="hide_form_btn" onClick={props.hidebtn}>&#x2715;</button>
+                <button className="hide_form_btn" onClick={props.HideForm}>&#x2715;</button>
             </div>
 
             <p className="error">{error}</p>
@@ -85,7 +84,7 @@ function Signup(props) {
         
             <div className="signup_btn_div"><button className="signup_btn">Create Account</button></div>
             </form>
-            <p className="signup_have">Already have an account? <button onClick={props.login_btn}>Log in</button></p>
+            <p className="signup_have">Already have an account? <button onClick={props.LoginForm}>Log in</button></p>
         </div>
         </div>
     )

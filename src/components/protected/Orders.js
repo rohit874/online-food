@@ -40,6 +40,9 @@ const [items, setItems] = useState([]);
         !items.length ? <h2 className="cart_no_found">Nothing in the Order!</h2>
         :
          items.map((items)=>{
+            const orderTime = new Date(items.date);
+            orderTime.setHours(orderTime.getHours() + 1);
+            const time = new Date(orderTime).toLocaleTimeString('en', { timeStyle: 'short', hour12: true, timeZone: 'Asia/Kolkata' });
             return(
             <div className="item" key={items._id}>
             <div className="item_details">
@@ -49,7 +52,7 @@ const [items, setItems] = useState([]);
                     <p>&#8377;{items.price}</p>
                     <p>Payment method : {items.payment}</p>
                     <p>Status : {items.status}</p>
-                    <p className="order_confirm_text">Delivered by 02:35 PM</p>
+                    <p className="order_confirm_text">Delivered by {time}</p>
                 </div>
             </div>
             <p className="order_address">Address : {items.address}</p>

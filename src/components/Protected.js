@@ -5,8 +5,8 @@ const Protected = (props) =>{
     let Cmp = props.cmp;
     useEffect(() => {
         if (!localStorage.hasOwnProperty("authToken")) {
-            history.goBack();
             props.LoginForm();
+            history.push('/cart');
         }
         
     })

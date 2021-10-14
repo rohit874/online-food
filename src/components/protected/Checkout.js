@@ -36,6 +36,7 @@ function Checkout() {
     })
 
     const placeOrder = () => {
+        data.date=new Date();
         if (!cart.items) {
             return;
         }
