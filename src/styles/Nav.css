@@ -15,6 +15,7 @@ nav{
     /* margin-left: 10px; */
 }
 .search{
+    position: relative;
     width: 550px;
     margin: 0px auto;
     display: flex;
@@ -39,6 +40,8 @@ nav{
     display: inline-block;
     width: 20px;
     height: 20px;
+    object-fit: cover;
+    object-position: center;
 }
 .input_divider{
     margin-left: 1px;
@@ -61,6 +64,56 @@ nav{
     width: 20px;
     height: 20px;
 }
+.search_div{
+    position: absolute;
+    top: 50px;
+    padding: 5px;
+    border-radius: 4px;
+    overflow: auto;
+    box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2);
+    background-color: white;
+    width: 100%;
+    max-height: 350px;
+}
+.serach_items{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    border-radius: 4px;
+    margin: 5px 0;
+    padding: 2px;
+}
+.serach_items:hover{
+    background-color: #f3f3f3;
+}
+.serach_items img{
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+}
+.serach_items div{
+    margin: 5px 20px;
+}
+.serach_items div h4{
+    font-size: 15px;
+    font-weight: 600;
+}
+.serach_items div p{
+    font-size: 13px;
+}
+.serach_items div span{
+    font-size: 13px;
+}
+.serach_items div span span{
+    color: coral;
+    font-size: 16px;
+}
+
+
+
+
+
 .nav_right{
     display: flex;
     justify-content: center;

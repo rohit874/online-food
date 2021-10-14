@@ -1,21 +1,21 @@
-import React from 'react'
-import { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router'
-import axios from 'axios'
-import '../styles/restaurant.css'
+import { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router';
+import axios from 'axios';
+import '../styles/restaurant.css';
 import { CartContext } from "../CartContext";
+import {ReactComponent as LoadingIcon} from '../images/loading_icon.svg';
 
 function Restaurant() {
     const { cart, setCart } = useContext(CartContext);
     const [resInfo, setResInfo] = useState({});
     const [resItems, setResItems] = useState({});
-    const params = useParams()
+    const {id} = useParams();
     useEffect(() => {
-        axios.get(`https://online-food-backend-api.herokuapp.com/api/restaurant/${params.id}`).then((res) => {
+        axios.get(`http://localhost:5000/api/restaurant/${id}`).then((res) => {
             setResInfo(res.data.resInfo);
             setResItems(res.data);
         }).then()
-    });
+    },[id]);
 
     const AddToCart = (e,product)=>{
         let _cart = {...cart};
@@ -50,6 +50,7 @@ function Restaurant() {
 
     return (
         <div>
+            {resInfo?<>
             <div className="res_head">
                 <img src={resInfo.image} className="res_head_img" alt="" />
                 <div className="res_details">
@@ -105,6 +106,9 @@ function Restaurant() {
                     )
                 })}
             </div>
+            </>:<div className="content_loading">
+            <LoadingIcon className="content_loading_animation" />
+            </div>}
         </div>
     )
 }

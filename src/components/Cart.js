@@ -21,7 +21,7 @@ const Cart = ()=>{
         if (itemFetched) {
             return;
         }
-        fetch('https://online-food-backend-api.herokuapp.com/api/cart',{
+        fetch('http://localhost:5000/api/cart',{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'

@@ -2,11 +2,13 @@ import {useState,useEffect} from 'react'
 import Product from "./Product";
 import "../styles/products.css";
 import axios from 'axios';
+import {ReactComponent as LoadingIcon} from '../images/loading_icon.svg';
+
 function Products() {
     const [products,setProducts] = useState([]);
 
     useEffect(()=>{
-        axios.get('https://online-food-backend-api.herokuapp.com/api/restaurant')
+        axios.get('http://localhost:5000/api/restaurant')
         .then((res)=> {
     setProducts(res.data);
    });
@@ -24,8 +26,11 @@ function Products() {
         </div>
             <div className="products">
             {
+                products.length?
                    products.map(product => <Product key={product._id} product={product}/>)
-                }
+                :<div className="content_loading">
+                <LoadingIcon className="content_loading_animation" />
+                </div>}
             </div>
         </div>
     )
