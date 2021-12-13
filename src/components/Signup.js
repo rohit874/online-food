@@ -1,5 +1,6 @@
 import {React,useState} from 'react';
 import axios from 'axios';
+import {ReactComponent as LoadingIcon} from '../images/loading_icon2.svg';
 
 function Signup(props) {
     const [label_class, setlabel_class] = useState({
@@ -15,12 +16,12 @@ function Signup(props) {
     const [email,SetEmail] = useState("");
     const [phone,SetPhone] = useState("");
     const [password,SetPassword] = useState("");
-
     const [error, setError] = useState("");
+    const [process,setProcess] = useState(false);
 
 
     const SignUpHandler = async (e) =>{
-
+      setProcess(true);
         e.preventDefault();
         const config = {
             header: {
@@ -29,24 +30,20 @@ function Signup(props) {
           };
 
       axios.post(
-      "http://localhost:5000/api/register",
+      "https://online-food-backend-api.herokuapp.com/api/register",
       { name, email, phone, password },
       config).then(res => {
-            // do good things
             localStorage.setItem("authToken", res.data.access_token);
             props.setLoginState(true);
+            setProcess(false);
     })
     .catch(err => {
+      setProcess(false);
         if (err.response) {
           setError(err.response.data.message);
           setTimeout(() => {
                   setError("");
                 }, 5000);
-          // client received an error response (5xx, 4xx)
-        } else if (err.request) {
-          // client never received a response, or request never left
-        } else {
-          // anything else
         }
     })}
 
@@ -82,7 +79,7 @@ function Signup(props) {
             <input type="password" onClick={()=>inputClicked("password_label")} onChange={(e)=>SetPassword(e.target.value)} value={password} name="password" placeholder="" autoComplete="on"/>
             </div>
         
-            <div className="signup_btn_div"><button className="signup_btn">Create Account</button></div>
+            <div className="signup_btn_div"><button className="signup_btn">{!process?"Create Account":<LoadingIcon className="process_icon" />}</button></div>
             </form>
             <p className="signup_have">Already have an account? <button onClick={props.LoginForm}>Log in</button></p>
         </div>

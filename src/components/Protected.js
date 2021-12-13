@@ -11,9 +11,7 @@ const Protected = (props) =>{
         
     })
     return(
-       
-        localStorage.hasOwnProperty("authToken") ? <Cmp /> : ""
-        
+        props.islogIn ? <Cmp /> : ""
     )
 }
 

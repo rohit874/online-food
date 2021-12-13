@@ -18,7 +18,7 @@ function Nav({cart,Logout, islogIn, LoginForm }) {
         if (quary==="") {
             return
         }
-        await axios.get(`http://localhost:5000/api/search/${quary}`)
+        await axios.get(`https://online-food-backend-api.herokuapp.com/api/search/${quary}`)
         .then((res)=> {
             setSearchResult(res.data.result)
    });
@@ -64,13 +64,13 @@ function Nav({cart,Logout, islogIn, LoginForm }) {
                 </div>
             </div>
             <div className="nav_right">
-            { islogIn ? <button onClick={Logout}>Logout</button>:<button onClick={LoginForm}>Sign in</button> }
                 <Link to="/cart">
                     <div className="cart">
                         <img src={cart_img} alt="cart" />
                         <span>{cart.totalitems>0 ? cart.totalitems:null }</span>
                     </div>
                 </Link>
+                { islogIn ? <button onClick={Logout}>Logout</button>:<button onClick={LoginForm}>Sign in</button> }
             </div>
         </nav>
     )

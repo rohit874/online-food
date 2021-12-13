@@ -9,9 +9,9 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Protected from './components/Protected';
 import Nav from './components/Nav';
-import './styles/home.css'
-import { useState, useEffect } from 'react'
-import { CartContext } from './CartContext'
+import './styles/home.css';
+import { useState, useEffect } from 'react';
+import { CartContext } from './CartContext';
 
 const App = () => {
     const [cart, setCart] = useState({items:{},totalitems:null});
@@ -87,13 +87,13 @@ const App = () => {
                             component={Restaurant}
                         ></Route>
                         <Route path="/order">
-                            <Protected  cmp={Orders} LoginForm={LoginForm}/>
+                            <Protected islogIn={islogIn}  cmp={Orders} LoginForm={LoginForm}/>
                         </Route>
                         <Route path="/delivered">
-                        <Protected  cmp={Delivered} LoginForm={LoginForm}/>
+                        <Protected islogIn={islogIn}  cmp={Delivered} LoginForm={LoginForm}/>
                         </Route>
                         <Route path="/checkout">
-                        <Protected  cmp={Checkout} LoginForm={LoginForm}/>
+                        <Protected islogIn={islogIn}  cmp={Checkout} LoginForm={LoginForm}/>
                         </Route>
                         <Route path="/signup" component={Signup}></Route>
                         <Route path="/login" component={Login}></Route>

@@ -8,13 +8,23 @@
     margin:10px 15px;
 }
 .filter{
-    max-width: 800px;
+    max-width: 700px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    margin: 0 auto;
+}
+.filter_icon{
+    width: 14px;
+    height: 14px;
+    margin-left: 5px;
+    fill: #a5a5a5;
 }
 .filter_button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: #a5a5a5;
     border: 1px solid #bdbcbc;
     background-color: white;
@@ -26,10 +36,10 @@
 .filter_button:hover{
     background-color: #f8f8f8;
 }
-.filter_button_seleted{
-    background-color: #e47327;
+.filter_on{
+    background-color: coral;
     color: white;
-    border: 1px solid #e47327;
+    border: 1px solid coral;
     padding: 7px 12px;
     border-radius: 4px;
     margin: 5px;

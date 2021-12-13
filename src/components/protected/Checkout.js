@@ -1,6 +1,9 @@
 import { React, useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router';
 import { CartContext } from "../../CartContext";
+import axios from 'axios';
+import {ReactComponent as LoadingIcon3} from '../../images/loading_icon3.svg';
+import {ReactComponent as DoneIcon} from '../../images/done_icon.svg';
 
 function Checkout() {
     const history = useHistory();
@@ -12,10 +15,30 @@ function Checkout() {
     const [selectedAddress, setSelectedAddress] = useState("");
     const pay = "COD";
     const data = {pay,address:selectedAddress};
+    const [process, setProcess] = useState(false);
+    const [orderPlaced, setOrderPlaced] = useState(false);
+
+    useEffect(() => {
+      var config = {
+        headers:{
+        'Content-Type': 'application/json',
+        'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
+      }};
+        axios.get(`https://online-food-backend-api.herokuapp.com/api/getuser`,config)
+        .then(res => {
+        SetAllAddress(res.data.user.address)
+        })
+        .catch(err => {
+            if (err) {
+                console.log(err);
+            }
+        })
+    }, [])
+
 
     const changeAddress = () =>{
       if (address.length<10) {
-        setAddressErr("Please provide a valid address..lenght should be >10");
+        setAddressErr("Please provide a valid address..lenght should be more than 10");
         return;
       }
       setAddressErr("");
@@ -29,45 +52,48 @@ function Checkout() {
     useEffect(() => {
       //redirect user if user want to visit this page without adding items in cart
       const totali = localStorage.getItem('cart');
+      setAddress()
      if (!localStorage.hasOwnProperty("cart")|| JSON.parse(totali).totalitems<1 || !localStorage.hasOwnProperty("subtotal")) {
-      history.push('/')
-       return;
+      history.push('/');
+      return;
      }
-    })
+    },[history]);
 
     const placeOrder = () => {
         data.date=new Date();
         if (!cart.items) {
             return;
         }
+        data.address = data.address.trim();
         if (data.address==="") {
         setAddressErr("Please select address...");
           return;
         }
-        fetch('http://localhost:5000/api/checkout',{
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
-            },
-            body: JSON.stringify({items:cart.items, data})
-        }).then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error(response.statusText);
-            }
-          })
-          .then((responseJson) => {
-            //clear cart
+        setProcess(true);
+        var config = {
+          headers:{
+          'Content-Type': 'application/json',
+          'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
+        }};
+        let itemsData = JSON.stringify({items:cart.items, data});
+    
+          axios.post(`https://online-food-backend-api.herokuapp.com/api/checkout`,itemsData,config)
+          .then(res => {
+            // clear cart
             localStorage.removeItem('cart')
             localStorage.removeItem('subtotal')
             setCart({items:{},totalitems:null});
-            history.push('/cart')
+            setProcess(false);
+            setOrderPlaced(true);
+            setTimeout(() => {
+            history.push('/order');
+            }, 2000);
           })
-          .catch((error) => {
-            console.log(error)
-          });
+          .catch(err => {
+              if (err) {
+                  console.log(err);
+              }
+          })
     };
     //show and hide the address input
     const [Address_input,setAddress_input] = useState(false);
@@ -90,10 +116,7 @@ function Checkout() {
               <label>{address}</label>
               </div>
             )
-          })
-
-        }
-
+          })}
         <button className="add_new_add" onClick={ShowHideAddress}>Add New Address</button>
         <div style={{display: Address_input ? "flex" : "none"}} className="add_address">
         <textarea placeholder="Write Full Address" onChange={(e)=>setAddress(e.target.value)} value={address}></textarea>
@@ -101,7 +124,7 @@ function Checkout() {
         </div>
 
         <div className="checkout_divider"></div>
-        <h5 className="checkout_heading">Payment options : </h5>
+        {!orderPlaced?<><h5 className="checkout_heading">Payment options : </h5>
         <div className="input_method_div">
         <div className="select_pay">
         <input type="radio" id="COD" name="input_method" value="COD" defaultChecked={true} />
@@ -127,9 +150,11 @@ function Checkout() {
         <input type="radio" id="UPI" name="input_method" value="UPI" disabled={true} />
         <label>UPI</label>
         </div>
-
         </div>
-        <div className="checkout_button_div"><button className="checkout_button" onClick={placeOrder}>Place order</button></div>
+        </>:
+        <div className="order_placed"><p>Your order is placed </p><DoneIcon className="done_icon" /></div>
+        }
+        <div className="checkout_button_div"><button className="checkout_button" onClick={placeOrder}>{!process?"Place order":<LoadingIcon3 className="process_icon3" />}</button></div>
         </div>
         </>
     )

@@ -11,13 +11,13 @@ function Restaurant() {
     const [resItems, setResItems] = useState({});
     const {id} = useParams();
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/restaurant/${id}`).then((res) => {
+        axios.get(`https://online-food-backend-api.herokuapp.com/api/restaurant/${id}`).then((res) => {
             setResInfo(res.data.resInfo);
             setResItems(res.data);
-        }).then()
+        })
     },[id]);
 
-    const AddToCart = (e,product)=>{
+    const AddToCart = (product)=>{
         let _cart = {...cart};
         if (!_cart.items) {
             _cart.items ={};
@@ -34,7 +34,7 @@ function Restaurant() {
         _cart.totalitems += 1; 
         setCart(_cart);
     }
-    const RemoveFromCart = (e,product)=>{
+    const RemoveFromCart = (product)=>{
         let _cart = {...cart};
         if (_cart.items[product.item_id]===1) {
             delete _cart.items[product.item_id];
@@ -42,7 +42,7 @@ function Restaurant() {
         else{
             _cart.items[product.item_id] -= 1;
         }
-        if (_cart.totalitems>=0) {
+        if (_cart.totalitems>0) {
         _cart.totalitems -= 1; 
         }
         setCart(_cart);
@@ -50,7 +50,7 @@ function Restaurant() {
 
     return (
         <div>
-            {resInfo?<>
+            {!Object.keys(resInfo).length <=0 ?<>
             <div className="res_head">
                 <img src={resInfo.image} className="res_head_img" alt="" />
                 <div className="res_details">
@@ -95,11 +95,11 @@ function Restaurant() {
                             <div className="item_button">
                                 {
                                    cart.items && cart.items[items._id]
-                               ? <><button className="item_dec_button" onClick={(e)=>{RemoveFromCart(e, {item_id:items._id})}} > - </button>
+                               ? <><button className="item_dec_button" onClick={(e)=>{RemoveFromCart({item_id:items._id})}} > - </button>
                                <span>{cart.items[items._id]}</span>
-                               <button className="item_inc_button" onClick={(e)=>{AddToCart(e, {item_id:items._id})}} > + </button> 
+                               <button className="item_inc_button" onClick={(e)=>{AddToCart({item_id:items._id})}} > + </button> 
                                </>
-                                : <button onClick={(e)=>{AddToCart(e, {item_id:items._id})}} className="item_Add_button">Add</button>
+                                : <button onClick={(e)=>{AddToCart({item_id:items._id})}} className="item_Add_button">Add</button>
                 }
                             </div>
                         </div>

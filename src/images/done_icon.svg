@@ -1,0 +1,48 @@
+<svg version="1.1" id="tick" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 37 37" style="enable-background:new 0 0 37 37;" xml:space="preserve">
+  <style>
+    .path{
+	    <!-- stroke: #6BBC43; -->
+    }
+    .circ{
+	    stroke-dasharray: 130;
+	    -webkit-animation: drawCircle 1.5s linear;
+	    -moz-animation: drawCircle 1.5s linear;
+	    -ms-animation: drawCircle 1.5s linear;
+	    -o-animation: drawCircle 1.5s linear;
+	    animation: drawCircle 1.5s linear;
+    }
+    .tick{
+	    stroke-dasharray: 50;
+	    -webkit-transition: drawTick 1s linear;
+	    -moz-transition: drawTick 1s linear;
+	    -o-transition: drawTick 1s linear;
+	    animation: drawTick 1s linear;
+    }
+    @keyframes drawTick {
+	    from{
+		    stroke-dashoffset: 50;
+		    opacity:0
+	    }
+	    to{
+		    stroke-dashoffset: 0;
+		    opacity:1
+	    }
+    }
+    @keyframes drawCircle {
+	    from{
+		    stroke-dashoffset: 130;
+		    opacity:0
+	    }
+	    to{
+		    stroke-dashoffset: 0;
+		    opacity:1
+	    }
+    }
+  </style>
+	<path class="circ path" style="fill:none;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" d="
+	M30.5,6.5L30.5,6.5c6.6,6.6,6.6,17.4,0,24l0,0c-6.6,6.6-17.4,6.6-24,0l0,0c-6.6-6.6-6.6-17.4,0-24l0,0C13.1-0.2,23.9-0.2,30.5,6.5z"
+	/>
+	<polyline class="tick path" style="fill:none;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" points="
+	11.6,20 15.9,24.2 26.4,13.8 " stroke-linecap="round" />
+</svg>

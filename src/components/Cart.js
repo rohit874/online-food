@@ -2,6 +2,9 @@ import { Link, NavLink } from 'react-router-dom';
 import '../styles/cart.css';
 import { useState, useEffect, useContext } from 'react'
 import { CartContext } from "../CartContext";
+import axios from 'axios';
+import {ReactComponent as LoadingIcon} from '../images/loading_icon.svg';
+
 
 const Cart = ()=>{
 
@@ -21,17 +24,22 @@ const Cart = ()=>{
         if (itemFetched) {
             return;
         }
-        fetch('http://localhost:5000/api/cart',{
-            method: 'POST',
+        let itemsIds =  Object.keys(cart.items)
+        var config = {
             headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ids:Object.keys(cart.items)})
-        }).then(res=>res.json())
-        .then(items=>{
-            setItemFetched(true);
-            setCartItems(items);
-        })
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
+          }};
+          axios.post(`https://online-food-backend-api.herokuapp.com/api/cart`, {ids:itemsIds}, config)
+            .then(res => {
+                setItemFetched(true);
+                setCartItems(res.data);
+            })
+            .catch(err => {
+                if (err) {
+                    console.log(err);
+                }
+            })
     }, [itemFetched,cart]);
 
     const AddToCart = (e,product)=>{
@@ -74,7 +82,7 @@ const Cart = ()=>{
         <div className="cart_button"><NavLink to="/cart"><button>Cart</button></NavLink><NavLink to="/order"><button>Orders</button></NavLink><NavLink to="/delivered"><button>Delivered</button></NavLink></div>
         { cart.totalitems<1 ? <h2 className="cart_no_found">Nothing in the Cart!</h2> 
 
-        : cartItems.map((items) => {
+        : cartItems.length? cartItems.map((items) => {
             if (cart.items[items._id]) {
                 subTotal += items.price* cart.items[items._id];
                     return ( <div className="item" key={items._id}>
@@ -93,7 +101,11 @@ const Cart = ()=>{
                     </div>
                 </div>)
                 } else{ return ""}
-                })}
+                }):<div className="content_loading">
+                <LoadingIcon className="content_loading_animation" />
+                </div>
+                
+                }
 
 { cart.totalitems>0 ?
                 <div className="checkout_button_div">

@@ -152,8 +152,6 @@
     border: none;
     cursor: pointer;
 }
-
-
 .select_pay{
     display: flex;
     align-items: center;
@@ -169,4 +167,29 @@
 .select_pay label{
     font-size: 14px;
     margin: 10px;
+}
+.process_icon3{
+    background-color: transparent;
+    fill: white;
+    width: 70px;
+    height: 10px;
+}
+.order_placed{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0px 40px 0 rgba(0,0,0,0.2);
+    max-width: 400px;
+    border-radius: 3px;
+    margin: 20px auto;
+}
+.order_placed p{
+    margin: 10px 10px 10px 50px;
+}
+.done_icon{
+    margin: 10px 50px 10px 10px;
+    width: 50px;
+    height: 50px;
+    stroke: coral;
 }

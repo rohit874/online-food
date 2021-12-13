@@ -1,33 +1,30 @@
 import { NavLink } from 'react-router-dom';
 import '../../styles/cart.css';
 import { useEffect,useState } from 'react';
+import {ReactComponent as LoadingIcon} from '../../images/loading_icon.svg';
+import axios from 'axios';
 
 const Orders = ()=>{
 
 const [items, setItems] = useState([]);
-
+const [process, setProcess] = useState(true);
 
     useEffect(() => {
-
-        fetch('http://localhost:5000/api/order',{
-            method: 'POST',
+        var config = {
             headers:{
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
-            }
-        }).then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error(response.statusText);
-            }
-          })
-          .then((res) => {
-              setItems(res);
-          })
-          .catch((error) => {
-            console.log(error)
-          });
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
+          }};
+          axios.get(`https://online-food-backend-api.herokuapp.com/api/order`,config)
+            .then(res => {
+                setItems(res.data);
+                setProcess(false);
+            })
+            .catch(err => {
+                if (err) {
+                    console.log(err);
+                }
+            })
     }, []);
 
 
@@ -37,6 +34,7 @@ const [items, setItems] = useState([]);
         <div className="cart_parent">
         <div className="cart_button"><NavLink to="/cart"><button>Cart</button></NavLink><NavLink to="/order"><button>Orders</button></NavLink><NavLink to="/delivered"><button>Delivered</button></NavLink></div>
         {
+        !process?
         !items.length ? <h2 className="cart_no_found">Nothing in the Order!</h2>
         :
          items.map((items)=>{
@@ -60,7 +58,9 @@ const [items, setItems] = useState([]);
         </div>
             )
         })
-    }
+    :<div className="content_loading">
+    <LoadingIcon className="content_loading_animation" />
+    </div>}
         </div>
         </>
     )
