@@ -3,12 +3,14 @@ import { useHistory } from 'react-router';
 import { CartContext } from "../../CartContext";
 import axios from 'axios';
 import {ReactComponent as LoadingIcon3} from '../../images/loading_icon3.svg';
+import {ReactComponent as LoadingIcon} from '../../images/loading_icon.svg';
 import {ReactComponent as DoneIcon} from '../../images/done_icon.svg';
 
 function Checkout() {
     const history = useHistory();
-    const grandTotal = window.localStorage.getItem('subtotal');
-    const { cart, setCart} = useContext(CartContext);
+    const { cart, setCart, subTotal, setSubTotal} = useContext(CartContext);
+    const [ cartItems, setCartItems ] = useState([]);
+    const [itemFetched, setItemFetched] = useState(false);
     const [address,setAddress] = useState("");
     const [addressErr,setAddressErr] = useState("");
     const [allAddress, SetAllAddress] = useState([]);
@@ -24,16 +26,41 @@ function Checkout() {
         'Content-Type': 'application/json',
         'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
       }};
-        axios.get(`https://online-food-backend-api.herokuapp.com/api/getuser`,config)
-        .then(res => {
-        SetAllAddress(res.data.user.address)
-        })
-        .catch(err => {
-            if (err) {
-                console.log(err);
-            }
-        })
-    }, [])
+      let itemsIds =  Object.keys(cart.items);
+
+      axios.get(`https://online-food-backend-api.herokuapp.com/api/getuser`,config)
+      .then(res => {
+      SetAllAddress(res.data.user.address)
+      })
+      .catch(err => {
+          if (err) {
+              console.log(err);
+          }
+      });
+      axios.post(`https://online-food-backend-api.herokuapp.com/api/cart`, {ids:itemsIds}, config)
+          .then(res => {
+              setCartItems(res.data);
+          })
+          .catch(err => {
+              if (err) {
+                  console.log(err);
+              }
+          })
+    }, [cart.items]);
+
+
+    useEffect(() => {
+      let total=0;
+      cartItems.forEach((items)=>{
+          if (cart.items[items._id]) {
+              total += items.price * cart.items[items._id];
+          }
+      })
+      setSubTotal(total);
+      if (cartItems.length) {
+      setItemFetched(true);
+      }
+  }, [cartItems,cart.items,setSubTotal])
 
 
     const changeAddress = () =>{
@@ -52,11 +79,10 @@ function Checkout() {
     useEffect(() => {
       //redirect user if user want to visit this page without adding items in cart
       const totali = localStorage.getItem('cart');
-      setAddress()
-     if (!localStorage.hasOwnProperty("cart")|| JSON.parse(totali).totalitems<1 || !localStorage.hasOwnProperty("subtotal")) {
-      history.push('/');
-      return;
-     }
+      if (!totali || JSON.parse(totali).totalitems<1) {
+        history.push('/');
+        return;
+      }
     },[history]);
 
     const placeOrder = () => {
@@ -102,9 +128,9 @@ function Checkout() {
     }
 
     return (
-        <>
+      itemFetched?<>
         <div className="checkout">
-        <div className="grand_total"><h4>Grand total</h4><h4>&#8377;{grandTotal}</h4></div>
+        <div className="grand_total"><h4>Grand total</h4><h4>&#8377;{subTotal}</h4></div>
         <div className="checkout_divider"></div>
         <p className="error">{addressErr}</p>
         <h5 className="checkout_heading">Select Address : </h5>
@@ -156,7 +182,9 @@ function Checkout() {
         }
         <div className="checkout_button_div"><button className="checkout_button" onClick={placeOrder}>{!process?"Place order":<LoadingIcon3 className="process_icon3" />}</button></div>
         </div>
-        </>
+        </>:<div className="content_loading">
+                <LoadingIcon className="content_loading_animation" />
+                </div>
     )
 }
 

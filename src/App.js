@@ -15,7 +15,9 @@ import { CartContext } from './CartContext';
 
 const App = () => {
     const [cart, setCart] = useState({items:{},totalitems:null});
+    const [subTotal, setSubTotal] = useState(0);
     const [islogIn, setIsLogin] = useState(false);
+    
     useEffect(() => {
       setCart.items=[];
         const cart = window.localStorage.getItem('cart');
@@ -63,7 +65,7 @@ const App = () => {
     return (
         <>
             <Router>
-                <CartContext.Provider value={{ cart, setCart, islogIn }}>
+                <CartContext.Provider value={{ cart, setCart, islogIn, subTotal, setSubTotal }}>
                     <Nav
                     LoginForm={LoginForm}
                     islogIn={islogIn}

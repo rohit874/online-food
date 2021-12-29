@@ -7,15 +7,13 @@ import {ReactComponent as LoadingIcon} from '../images/loading_icon.svg';
 
 
 const Cart = ()=>{
-
-    let subTotal = 0;
-    const { cart, setCart} = useContext(CartContext);
+    const { cart, setCart, subTotal, setSubTotal} = useContext(CartContext);
     const [ cartItems, setCartItems ] = useState([]);
     const [itemFetched, setItemFetched] = useState(false);
 
-    useEffect(() => {
-        window.localStorage.setItem('subtotal', subTotal);
-      });
+    // useEffect(() => {
+    //     window.localStorage.setItem('subtotal', subTotal);
+    //   });
 
     useEffect(() => {
         if (!cart.items) {
@@ -41,6 +39,16 @@ const Cart = ()=>{
                 }
             })
     }, [itemFetched,cart]);
+
+    useEffect(() => {
+        let total=0;
+        cartItems.forEach((items)=>{
+            if (cart.items[items._id]) {
+                total += items.price * cart.items[items._id];
+            }
+        })
+        setSubTotal(total);
+    }, [cartItems,cart,setSubTotal])
 
     const AddToCart = (e,product)=>{
         let _cart = {...cart};
@@ -73,8 +81,6 @@ const Cart = ()=>{
         }
         setCart(_cart);
     }
-        
-
 
     return(
         <>
@@ -84,7 +90,6 @@ const Cart = ()=>{
 
         : cartItems.length? cartItems.map((items) => {
             if (cart.items[items._id]) {
-                subTotal += items.price* cart.items[items._id];
                     return ( <div className="item" key={items._id}>
                     <div className="item_details">
                         <img src={items.image} alt="" />
