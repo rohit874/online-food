@@ -12,12 +12,13 @@ import Nav from './components/Nav';
 import './styles/home.css';
 import { useState, useEffect } from 'react';
 import { CartContext } from './CartContext';
+import axios from 'axios';
 
 const App = () => {
     const [cart, setCart] = useState({items:{},totalitems:null});
     const [subTotal, setSubTotal] = useState(0);
     const [islogIn, setIsLogin] = useState(false);
-    
+
     useEffect(() => {
       setCart.items=[];
         const cart = window.localStorage.getItem('cart');
@@ -25,7 +26,21 @@ const App = () => {
           setCart(JSON.parse(cart));
           }
           if (localStorage.hasOwnProperty("authToken")) {
-              setIsLogin(true);
+            var config = {
+                headers:{
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${window.localStorage.getItem('authToken')}`
+              }};
+            axios.get(`https://online-food-backend-api.herokuapp.com/api/getuser`,config)
+            .then(res => {
+                setIsLogin(true);
+            })
+            .catch(err => {
+                console.log(err.response);
+                if (err.response.status===401) {
+                Logout(); 
+                }
+            });
           }
     }, [])
 
@@ -65,7 +80,7 @@ const App = () => {
     return (
         <>
             <Router>
-                <CartContext.Provider value={{ cart, setCart, islogIn, subTotal, setSubTotal }}>
+                <CartContext.Provider value={{ cart, setCart, islogIn, setIsLogin, subTotal, setSubTotal }}>
                     <Nav
                     LoginForm={LoginForm}
                     islogIn={islogIn}
